@@ -1,0 +1,663 @@
+html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>AURA System – VERSUS™</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #050814;
+      --bg-alt: #0b1020;
+      --card: #111729;
+      --accent: #2f7bff;
+      --accent-soft: #2f7bff22;
+      --text: #f5f7ff;
+      --muted: #9aa3c7;
+      --border: #1c2236;
+      --danger: #ff4b6a;
+      --success: #3ac97a;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      background: radial-gradient(circle at top, #1a2440 0, #050814 55%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(to bottom, #050814ee, #050814cc 60%, transparent);
+      border-bottom: 1px solid #151b2b;
+    }
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+      gap: 1.5rem;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    /* LOGO AURA INSERTADO */
+    .brand-logo {
+      width: 42px;
+      height: auto;
+      border-radius: 6px;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+    .brand-text span:first-child {
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+    }
+    .brand-text span:last-child {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    nav a {
+      font-size: 0.8rem;
+      padding: 0.35rem 0.6rem;
+      border-radius: 999px;
+      color: var(--muted);
+      border: 1px solid transparent;
+      transition: 0.18s ease;
+      white-space: nowrap;
+    }
+    nav a:hover {
+      color: var(--text);
+      border-color: #222b44;
+      background: #0f1729;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #2f7bff, #7f60ff);
+      color: #fdfdff;
+      border-radius: 999px;
+      padding: 0.45rem 1.1rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 0 0 1px #2f7bff55, 0 18px 35px #000000aa;
+    }
+    main {
+      padding: 2.5rem 0 4rem;
+    }
+    section {
+      padding: 3rem 0 2.5rem;
+      border-bottom: 1px solid #101629;
+    }
+    section:last-of-type {
+      border-bottom: none;
+      padding-bottom: 4rem;
+    }
+    h1, h2, h3 {
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+    h1 {
+      font-size: 2.3rem;
+      margin-bottom: 0.75rem;
+    }
+    h2 {
+      font-size: 1.4rem;
+      margin-bottom: 1.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+    }
+    h3 {
+      font-size: 1rem;
+      margin: 1.2rem 0 0.4rem;
+      color: #d7ddff;
+    }
+    p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    /* IMAGEN HERO INSERTADA */
+    .hero-img {
+      width: 100%;
+      border-radius: 14px;
+      box-shadow: 0 18px 40px #00000066;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid #28314a;
+      background: #050814;
+      color: var(--muted);
+      font-size: 0.7rem;
+      margin-bottom: 0.75rem;
+    }
+    .hero-tag span {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #6ddcff, #7f60ff);
+    }
+    .hero-sub {
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 32rem;
+      margin-bottom: 1.2rem;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    .hero-card {
+      border-radius: 1.1rem;
+      background: radial-gradient(circle at top, #1b2442, #050814 55%);
+      border: 1px solid #1b2236;
+      padding: 1.4rem 1.3rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      box-shadow: 0 22px 40px #000000aa;
+    }
+    .hero-card h3 {
+      margin-top: 0;
+      margin-bottom: 0.4rem;
+      font-size: 0.9rem;
+    }
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.6rem;
+    }
+    .pill {
+      font-size: 0.7rem;
+      padding: 0.18rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid #28314a;
+      color: var(--muted);
+      background: #050814;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER / NAV -->
+  <header>
+    <div class="container">
+      <div class="nav">
+        <div class="brand">
+
+          <!-- LOGO AURA INSERTADO -->
+          <img src="assets/img/aura-logo.png" alt="AURA Logo" class="brand-logo">
+
+          <div class="brand-text">
+            <span>VERSUS™</span>
+            <span>AURA System – Hand Soap Ecosystem</span>
+          </div>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="#producto">Producto</a></li>
+            <li><a href="#como-funciona">Cómo funciona</a></li>
+            <li><a href="#impacto">Impacto ESG</a></li>
+            <li><a href="#ip">Propiedad Intelectual</a></li>
+            <li><a href="#fase0">Fase 0</a></li>
+            <li><a href="#market">Mercado</a></li>
+            <li><a href="#financials">Finanzas</a></li>
+            <li><a href="#roi">Retorno</a></li>
+            <li><a href="#comparison">Comparativa</a></li>
+            <li><a href="#investor">Investor Pitch</a></li>
+            <li><a href="#roadmap">Roadmap</a></li>
+            <li><a href="#sustainability">Sostenibilidad</a></li>
+            <li><a href="#technology">Tecnología</a></li>
+            <li><a href="#team">Equipo</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><button class="btn-primary" onclick="document.getElementById('investor').scrollIntoView({behavior:'smooth'})">Unirme</button></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- HERO / PRODUCTO -->
+    <section id="producto">
+      <div class="hero-grid">
+        <div>
+          <div class="hero-tag">
+            <span></span>
+            <small>AURA™ – Integrated PVA Hand Soap System</small>
+          </div>
+          <h1>El sistema que elimina la botella de jabón para siempre.</h1>
+          <p class="hero-sub">
+            AURA™ combina sachets concentrados en PVA con un dispenser diseñado para el hogar que disuelve, mezcla y dispensa jabón premium de forma automática. Cero plástico, cero esfuerzo, máxima experiencia.
+          </p>
+          <div class="hero-meta">
+            <span>• Sistema cerrado: sachet + dispenser + suscripción</span>
+            <span>• Diseñado bajo la master brand VERSUS™</span>
+          </div>
+        </div>
+
+        <!-- IMAGEN HERO INSERTADA -->
+        <div>
+          <img src="assets/img/aura-dispenser-front.jpg" alt="AURA Dispenser Front" class="hero-img">
+        </div>
+
+      </div>
+
+      <div class="hero-card">
+        <h3>Propuesta de valor en una frase</h3>
+        <p>
+          “Deja caer un sachet. El dispenser hace el resto: disuelve, mezcla y entrega jabón de manos premium en segundos. Sin plástico, sin desorden, sin fricción.”
+        </p>
+        <div class="pill-row">
+          <span class="pill">Cero plástico de un solo uso</span>
+          <span class="pill">Refill en 5 segundos</span>
+          <span class="pill">Diseño premium</span>
+          <span class="pill">Modelo de suscripción</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- AQUÍ TERMINA EL BLOQUE 1 -->
+<!-- CÓMO FUNCIONA -->
+    <section id="como-funciona">
+      <h2>Cómo funciona</h2>
+
+      <!-- IMAGEN 1: Sachet grande -->
+      <img src="assets/img/img-sachet-grande.png" 
+           alt="Sachet AURA Mix" 
+           style="width:260px; display:block; margin:0 auto 2rem;">
+
+      <h3>1. El sachet AURA Mix™</h3>
+      <p>
+        Un sachet de PVA biodegradable encapsula jabón concentrado. El usuario solo lo deja caer dentro del dispenser, sin medir, sin verter, sin ensuciar.
+      </p>
+
+      <!-- IMAGEN 2: Dispenser mezclando -->
+      <img src="assets/img/aura-dispenser-mix.jpg" 
+           alt="AURA Mixing Chamber" 
+           style="width:100%; max-width:520px; display:block; margin:1.5rem auto; border-radius:14px; box-shadow:0 18px 40px #00000066;">
+
+      <h3>2. Cámara de disolución</h3>
+      <p>
+        El dispenser activa la disolución del PVA con agua y dirige la mezcla hacia la cámara interna, donde se alcanza la concentración óptima.
+      </p>
+
+      <!-- IMAGEN 3: Detalle del dispenser -->
+      <img src="assets/img/aura-dispenser-detail.jpg" 
+           alt="AURA Dispenser Detail" 
+           style="width:100%; max-width:520px; display:block; margin:1.5rem auto; border-radius:14px; box-shadow:0 18px 40px #00000066;">
+
+      <h3>3. Mezcla automática</h3>
+      <p>
+        Un mecanismo interno asegura que cada ciclo produzca la misma concentración de jabón, eliminando la variabilidad del usuario.
+      </p>
+
+      <h3>4. Dispensado</h3>
+      <p>
+        El usuario recibe jabón listo para usar, en formato líquido o espuma, mediante sensor o pulsador, según la versión del dispositivo.
+      </p>
+    </section>
+<!-- IMPACTO ESG -->
+    <section id="impacto">
+      <h2>Impacto ESG</h2>
+      <h3>Ambiental</h3>
+      <ul>
+        <li>Elimina entre 50 y 100 botellas plásticas por hogar al año.</li>
+        <li>Reduce más del 90% del peso y volumen de transporte frente a jabón líquido tradicional.</li>
+        <li>Uso de PVA biodegradable, ya validado en aplicaciones masivas como detergentes en pods.</li>
+      </ul>
+      <h3>Social</h3>
+      <ul>
+        <li>Integra la sostenibilidad en un hábito diario: lavarse las manos.</li>
+        <li>Educa a familias y niños sobre consumo responsable y circularidad.</li>
+        <li>Producto que genera conversación y refuerza identidad eco-premium.</li>
+      </ul>
+      <h3>Gobernanza</h3>
+      <ul>
+        <li>Proyecto gestionado bajo estándares PMI/PMBOK.</li>
+        <li>Gate reviews formales antes de cada fase de inversión.</li>
+        <li>Documentación de riesgos, supuestos y validaciones de mercado.</li>
+      </ul>
+    </section>
+
+    <!-- PROPIEDAD INTELECTUAL -->
+    <section id="ip">
+      <h2>Propiedad Intelectual</h2>
+      <p>
+        AURA™ se apoya en una combinación de tecnologías probadas (PVA, dispensers automáticos, concentrados) integradas en un sistema único para el hogar.
+      </p>
+      <h3>Activos IP previstos</h3>
+      <ul>
+        <li>Diseño del mecanismo de disolución y mezcla automática.</li>
+        <li>Formato propietario de sachet AURA Mix™.</li>
+        <li>Arquitectura de ecosistema cerrado (dispenser + sachet + suscripción).</li>
+        <li>Diseño industrial del dispenser para uso residencial premium.</li>
+      </ul>
+      <p class="tagline">
+        La innovación clave no es una sola tecnología nueva, sino la integración de tecnologías maduras en un sistema unificado y defendible.
+      </p>
+    </section>
+
+    <!-- FASE 0 -->
+    <section id="fase0">
+      <h2>Fase 0 – Statement of Value</h2>
+      <p>
+        La Fase 0 establece por qué AURA™ debe existir antes de entrar en desarrollo completo: valida el problema, el mercado, la solución y la alineación estratégica con VERSUS™ y MacDave Inc.
+      </p>
+      <ul>
+        <li>Validación de que no existe un producto equivalente a nivel global.</li>
+        <li>Definición de segmentos objetivo y Jobs-to-Be-Done.</li>
+        <li>Evaluación preliminar de factibilidad técnica, de mercado, financiera y legal.</li>
+        <li>Recomendación Go / No-Go para avanzar a Business Case y prototipado.</li>
+      </ul>
+    </section>
+
+    <!-- MERCADO & POTENCIAL COMERCIAL -->
+    <section id="market">
+      <h2>Mercado & Potencial Comercial</h2>
+      <p>
+        AURA™ se dirige a hogares premium que valoran sostenibilidad, diseño y conveniencia. El foco inicial está en Canadá y Norteamérica, con expansión posterior.
+      </p>
+      <h3>Segmentos clave</h3>
+      <ul>
+        <li><strong>Eco-Conscious Premium Homeowners:</strong> 4–6 millones de hogares en Canadá y ~30 millones en Norteamérica.</li>
+        <li><strong>Design-Forward Homeowners:</strong> consumidores que pagan 2–3x por diseño superior.</li>
+        <li><strong>Convenience-Driven Subscribers:</strong> hogares que prefieren “set it and forget it”.</li>
+      </ul>
+      <h3>Contexto de mercado</h3>
+      <ul>
+        <li>Mercado de tabletas refill: ~$1.24B, con crecimiento anual cercano al 9%.</li>
+        <li>Mercado de dispensadores: ~$3B, con fuerte demanda en diseño premium.</li>
+        <li>Mercado de personal care sostenible: >$50B, en expansión acelerada.</li>
+      </ul>
+    </section>
+    <!-- PROYECCIÓN FINANCIERA -->
+    <section id="financials">
+      <h2>Proyección Financiera (1–3 años)</h2>
+      <p>
+        Las proyecciones se basan en penetración conservadora sobre el mercado objetivo y en un modelo de ingresos mixto: hardware + suscripción de sachets.
+      </p>
+      <table>
+        <tr>
+          <th>Año</th>
+          <th>Penetración estimada</th>
+          <th>Hogares</th>
+          <th>Ingresos estimados</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>0.05% del mercado objetivo</td>
+          <td>~18,000 hogares</td>
+          <td>$1.8M – $3.2M</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>0.15% del mercado objetivo</td>
+          <td>~54,000 hogares</td>
+          <td>$5.4M – $9.6M</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>0.30% del mercado objetivo</td>
+          <td>~108,000 hogares</td>
+          <td>$10.8M – $19.2M</td>
+        </tr>
+      </table>
+      <p>
+        El modelo de suscripción permite que el peso de los ingresos se desplace progresivamente hacia refills recurrentes con márgenes altos.
+      </p>
+    </section>
+
+    <!-- RETORNO DE LA INVERSIÓN -->
+    <section id="roi">
+      <h2>Retorno de la Inversión (ROI)</h2>
+      <p>
+        AURA™ combina un ticket inicial de hardware con ingresos recurrentes de sachets, lo que acelera la recuperación de la inversión en adquisición de clientes y desarrollo.
+      </p>
+      <h3>Drivers de ROI</h3>
+      <ul>
+        <li>Ingresos recurrentes: 60–70% del total proviene de refills.</li>
+        <li>Márgenes altos por concentrados y logística optimizada.</li>
+        <li>Lock-in del ecosistema: el dispenser ancla el uso de sachets AURA Mix™.</li>
+      </ul>
+      <h3>Métricas objetivo</h3>
+      <ul>
+        <li>CAC objetivo: $12–$18.</li>
+        <li>LTV estimado: $90–$120 por cliente.</li>
+        <li>Recuperación de CAC: < 2 meses en clientes suscritos.</li>
+      </ul>
+    </section>
+
+    <!-- COMPARATIVA & COMPETIDORES -->
+    <section id="comparison">
+      <h2>Comparativa & Competidores</h2>
+
+      <!-- IMAGEN VERSUS INSERTADA -->
+      <img src="assets/img/versus-logo.png" 
+           alt="Versus Logo" 
+           style="width:180px; display:block; margin:0 auto 2rem;">
+
+      <p>
+        AURA™ ocupa un espacio de “only-ness”: ningún competidor integra sachet PVA + disolución automática + diseño residencial premium en un solo sistema.
+      </p>
+      <table>
+        <tr>
+          <th>Alternativa</th>
+          <th>Qué ofrece</th>
+          <th>Qué le falta</th>
+        </tr>
+        <tr>
+          <td>Blueland / Myni</td>
+          <td>Tabletas refill para botellas reutilizables</td>
+          <td>Sin dispenser dedicado; disolución manual; espera de 15–30 minutos</td>
+        </tr>
+        <tr>
+          <td>Simplehuman / Kohler</td>
+          <td>Dispensers de diseño para el hogar</td>
+          <td>Sin innovación en refills; siguen usando jabón líquido tradicional</td>
+        </tr>
+        <tr>
+          <td>PURELL / GOJO</td>
+          <td>Sistemas cerrados para entornos comerciales</td>
+          <td>No son residenciales; no usan PVA; sin narrativa de sostenibilidad</td>
+        </tr>
+        <tr>
+          <td>DIY / bulk refill</td>
+          <td>Jabón a granel y recarga manual</td>
+          <td>Desorden, inconsistencia, sin diseño ni ecosistema de marca</td>
+        </tr>
+      </table>
+      <blockquote>
+        “AURA™ es el único sistema que combina sostenibilidad, diseño premium y automatización en un ecosistema cerrado para el hogar.”
+      </blockquote>
+    </section>
+<!-- INVESTOR PITCH -->
+    <section id="investor">
+      <h2>Investor Pitch</h2>
+      <p>
+        VERSUS™ + AURA™ representan una plataforma para construir una nueva categoría: higiene premium, sostenible y suscrita, empezando por el lavado de manos.
+      </p>
+      <h3>La tesis de inversión</h3>
+      <ul>
+        <li>White-space validado: no existe un sistema equivalente a nivel global.</li>
+        <li>Convergencia de tres megatendencias: packaging sostenible, refill en el hogar, hardware inteligente.</li>
+        <li>Modelo de ingresos recurrentes con márgenes altos y lock-in de ecosistema.</li>
+      </ul>
+      <h3>Uso estratégico de capital</h3>
+      <ul>
+        <li>Desarrollo y validación del dispenser (ingeniería + prototipos).</li>
+        <li>Formulación y escalado de sachets AURA Mix™.</li>
+        <li>Lanzamiento DTC y marketing digital full-funnel.</li>
+      </ul>
+      <p class="tagline">
+        AURA™ es el flagship que demuestra el poder de VERSUS™ como master brand de productos premium y sostenibles.
+      </p>
+    </section>
+
+    <!-- ROADMAP -->
+    <section id="roadmap">
+      <h2>Roadmap 2026–2029</h2>
+      <h3>2026 – Validación & Fundamentos</h3>
+      <ul>
+        <li>Completar validación de mercado y gap competitivo.</li>
+        <li>Prototipo funcional del dispenser y pruebas de disolución PVA.</li>
+        <li>Definición y registro de VERSUS™ y AURA™ como marcas.</li>
+      </ul>
+      <h3>2027 – Lanzamiento Comercial</h3>
+      <ul>
+        <li>Producción inicial del dispenser AURA™.</li>
+        <li>Lanzamiento DTC en Canadá.</li>
+        <li>Activación de estrategia digital (Instagram, TikTok, influencers).</li>
+        <li>Inicio de suscripción AURA Mix™.</li>
+      </ul>
+      <h3>2028 – Escalamiento & Expansión</h3>
+      <ul>
+        <li>Entrada a mercados clave en EE.UU.</li>
+        <li>Retail selectivo en tiendas de diseño y sostenibilidad.</li>
+        <li>Versión 2.0 del dispenser (opciones IoT).</li>
+      </ul>
+      <h3>2029 – Ecosistema VERSUS™</h3>
+      <ul>
+        <li>Extensión a nuevas líneas: Versus Clean™, Versus Body™, Versus Home™.</li>
+        <li>Optimización de costos y escalado internacional.</li>
+      </ul>
+    </section>
+
+    <!-- SOSTENIBILIDAD -->
+    <section id="sustainability">
+      <h2>Sostenibilidad & Impacto</h2>
+      <p>
+        AURA™ convierte la sostenibilidad en un hábito invisible pero poderoso: cada lavado de manos evita plástico, transporte innecesario y residuos.
+      </p>
+      <h3>Impacto cuantitativo</h3>
+      <ul>
+        <li>50–100 botellas plásticas menos por hogar al año.</li>
+        <li>Reducción de >90% en peso y volumen de envíos.</li>
+        <li>Contribución directa a objetivos de reducción de residuos plásticos.</li>
+      </ul>
+      <h3>Impacto cualitativo</h3>
+      <ul>
+        <li>Refuerza la identidad de hogares eco-premium.</li>
+        <li>Integra la sostenibilidad en el diseño, no como sacrificio.</li>
+        <li>Genera orgullo y conversación en el entorno social del usuario.</li>
+      </ul>
+    </section>
+
+    <!-- TECNOLOGÍA -->
+    <section id="technology">
+      <h2>Tecnología del Dispensador</h2>
+      <p>
+        El dispenser AURA™ está diseñado específicamente para el hogar, no adaptado desde entornos comerciales. Su tecnología se centra en la experiencia y la consistencia.
+      </p>
+      <h3>Componentes clave</h3>
+      <ul>
+        <li>Cámara de disolución dedicada para sachets PVA.</li>
+        <li>Mecanismo de mezcla que asegura concentración constante.</li>
+        <li>Opciones de activación: sensor o pulsador.</li>
+        <li>Diseño industrial premium: acero cepillado, cerámica o acabado mate.</li>
+      </ul>
+      <h3>Ventajas técnicas</h3>
+      <ul>
+        <li>Elimina errores de usuario en dilución.</li>
+        <li>Refill en menos de 5 segundos.</li>
+        <li>Arquitectura preparada para futuras integraciones IoT.</li>
+      </ul>
+    </section>
+<!-- EQUIPO & GOBIERNO -->
+    <section id="team">
+      <h2>Equipo & Gobierno del Proyecto</h2>
+      <p>
+        AURA™ es desarrollado bajo MacDave Inc. y la master brand VERSUS™, con un enfoque de gobernanza profesional y visión de plataforma.
+      </p>
+      <h3>Estructura de gobierno</h3>
+      <ul>
+        <li><strong>MacDave Inc.:</strong> entidad corporativa, IP, estrategia y financiamiento.</li>
+        <li><strong>VERSUS™:</strong> arquitectura de marca, narrativa y expansión de portafolio.</li>
+        <li><strong>PMO:</strong> gestión de roadmap, riesgos y decisiones de inversión.</li>
+      </ul>
+      <h3>Funciones clave</h3>
+      <ul>
+        <li>Ingeniería: diseño y validación del dispenser.</li>
+        <li>Producto: definición de experiencia AURA™ y ecosistema.</li>
+        <li>Marketing: adquisición, contenido y posicionamiento digital.</li>
+        <li>Operaciones: producción, logística y calidad.</li>
+      </ul>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <h2>Preguntas Frecuentes (FAQ)</h2>
+
+      <h3>¿Qué es exactamente AURA™?</h3>
+      <p>
+        Es un sistema integrado de higiene para manos que combina un dispenser premium con sachets concentrados en PVA y un modelo de suscripción.
+      </p>
+
+      <h3>¿El PVA es seguro y biodegradable?</h3>
+      <p>
+        Sí. El PVA se usa ampliamente en productos como detergentes en pods y cuenta con validación ambiental y regulatoria en múltiples mercados.
+      </p>
+
+      <h3>¿Necesito suscripción para usar el sistema?</h3>
+      <p>
+        No es obligatorio, pero la suscripción AURA Mix™ optimiza costos, conveniencia y disponibilidad continua de refills.
+      </p>
+
+      <h3>¿Cuánto dura un sachet?</h3>
+      <p>
+        Cada sachet está diseñado para equivaler a una botella completa de jabón líquido premium, dependiendo del patrón de uso del hogar.
+      </p>
+
+      <h3>¿El dispenser es reparable o reemplazable?</h3>
+      <p>
+        El diseño contempla durabilidad y la posibilidad de reemplazo de componentes clave para extender su vida útil y reducir residuos.
+      </p>
+    </section>
+
+  </main>
+
+</body>
+</html>
